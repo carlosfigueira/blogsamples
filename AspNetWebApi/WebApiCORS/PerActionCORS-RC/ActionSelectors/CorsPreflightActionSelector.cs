@@ -11,37 +11,36 @@ using PerActionCORS_RC.Filters;
 
 namespace PerActionCORS_RC.ActionSelectors
 {
-    public class CorsEnabledActionSelector : ApiControllerActionSelector
+    public class CorsPreflightActionSelector : ApiControllerActionSelector
     {
-        private const string Origin = "Origin";
-        private const string AccessControlRequestMethod = "Access-Control-Request-Method";
-        private const string AccessControlRequestHeaders = "Access-Control-Request-Headers";
-        private const string AccessControlAllowMethods = "Access-Control-Allow-Methods";
-        private const string AccessControlAllowHeaders = "Access-Control-Allow-Headers";
+        const string Origin = "Origin";
+        const string AccessControlRequestMethod = "Access-Control-Request-Method";
+        const string AccessControlRequestHeaders = "Access-Control-Request-Headers";
+        const string AccessControlAllowMethods = "Access-Control-Allow-Methods";
+        const string AccessControlAllowHeaders = "Access-Control-Allow-Headers";
 
         public override HttpActionDescriptor SelectAction(HttpControllerContext controllerContext)
         {
-            var originalRequest = controllerContext.Request;
-            var isCorsRequest = originalRequest.Headers.Contains(Origin);
+            HttpRequestMessage originalRequest = controllerContext.Request;
+            bool isCorsRequest = originalRequest.Headers.Contains(Origin);
 
             if (originalRequest.Method == HttpMethod.Options && isCorsRequest)
             {
-                var currentAccessControlRequestMethod = originalRequest.Headers.GetValues(AccessControlRequestMethod).FirstOrDefault();
-                if (!string.IsNullOrEmpty(currentAccessControlRequestMethod))
+                string accessControlRequestMethod = originalRequest.Headers.GetValues(AccessControlRequestMethod).FirstOrDefault();
+                if (!string.IsNullOrEmpty(accessControlRequestMethod))
                 {
-                    var modifiedRequest = new HttpRequestMessage(
-                        new HttpMethod(currentAccessControlRequestMethod),
+                    HttpRequestMessage modifiedRequest = new HttpRequestMessage(
+                        new HttpMethod(accessControlRequestMethod),
                         originalRequest.RequestUri);
                     controllerContext.Request = modifiedRequest;
-                    var actualDescriptor = base.SelectAction(controllerContext);
+                    HttpActionDescriptor actualDescriptor = base.SelectAction(controllerContext);
                     controllerContext.Request = originalRequest;
 
                     if (actualDescriptor != null)
                     {
                         if (actualDescriptor.GetFilters().OfType<EnableCorsAttribute>().Any())
                         {
-                            var descriptor = new PreflightActionDescriptor(actualDescriptor, currentAccessControlRequestMethod);
-                            return descriptor;
+                            return new PreflightActionDescriptor(actualDescriptor, accessControlRequestMethod);
                         }
                     }
                 }
@@ -52,28 +51,32 @@ namespace PerActionCORS_RC.ActionSelectors
 
         class PreflightActionDescriptor : HttpActionDescriptor
         {
-            private readonly HttpActionDescriptor originalAction;
-            private readonly string prefilghtAccessControlRequestMethod;
+            HttpActionDescriptor originalAction;
+            string accessControlRequestMethod;
             private HttpActionBinding actionBinding;
 
             public PreflightActionDescriptor(HttpActionDescriptor originalAction, string accessControlRequestMethod)
             {
                 this.originalAction = originalAction;
-                this.prefilghtAccessControlRequestMethod = accessControlRequestMethod;
+                this.accessControlRequestMethod = accessControlRequestMethod;
                 this.actionBinding = new HttpActionBinding(this, new HttpParameterBinding[0]);
             }
 
             public override string ActionName
             {
-                get { return originalAction.ActionName; }
+                get { return this.originalAction.ActionName; }
             }
 
             public override Task<object> ExecuteAsync(HttpControllerContext controllerContext, IDictionary<string, object> arguments)
             {
-                var response = new HttpResponseMessage(HttpStatusCode.OK);
-                response.Headers.Add(AccessControlAllowMethods, prefilghtAccessControlRequestMethod);
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
 
-                var requestedHeaders = string.Join(", ", controllerContext.Request.Headers.GetValues(AccessControlRequestHeaders));
+                // No need to add the Origin; this will be added by the action filter
+                response.Headers.Add(AccessControlAllowMethods, this.accessControlRequestMethod);
+
+                string requestedHeaders = string.Join(
+                    ", ", 
+                    controllerContext.Request.Headers.GetValues(AccessControlRequestHeaders));
 
                 if (!string.IsNullOrEmpty(requestedHeaders))
                 {
@@ -87,7 +90,7 @@ namespace PerActionCORS_RC.ActionSelectors
 
             public override Collection<HttpParameterDescriptor> GetParameters()
             {
-                return originalAction.GetParameters();
+                return this.originalAction.GetParameters();
             }
 
             public override Type ReturnType
@@ -97,17 +100,17 @@ namespace PerActionCORS_RC.ActionSelectors
 
             public override Collection<FilterInfo> GetFilterPipeline()
             {
-                return originalAction.GetFilterPipeline();
+                return this.originalAction.GetFilterPipeline();
             }
 
             public override Collection<IFilter> GetFilters()
             {
-                return originalAction.GetFilters();
+                return this.originalAction.GetFilters();
             }
 
             public override Collection<T> GetCustomAttributes<T>()
             {
-                return originalAction.GetCustomAttributes<T>();
+                return this.originalAction.GetCustomAttributes<T>();
             }
 
             public override HttpActionBinding ActionBinding

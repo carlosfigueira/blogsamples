@@ -8,7 +8,7 @@ using PerActionCORS_RC.Filters;
 
 namespace PerActionCORS_RC.Controllers
 {
-    [HttpControllerConfiguration(HttpActionSelector = typeof(CorsEnabledActionSelector))]
+    [HttpControllerConfiguration(HttpActionSelector = typeof(CorsPreflightActionSelector))]
     public class ValuesController : ApiController
     {
         static List<string> allValues = new List<string> { "value1", "value2" };
