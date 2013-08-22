@@ -8,6 +8,23 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Name="btnInsertComplexClientSide" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Margin="10" FontSize="30" Content="Insert movie (review as string)" Click="btnInsertComplexClientSide_Click" />
+        <Button Name="btnReadComplexClientSide" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Margin="10" FontSize="30" Content="Read movie (review as string)" Click="btnReadComplexClientSide_Click" />
+        <Button Name="btnInsertComplexServerSide" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"
+                Margin="10" FontSize="30" Content="Insert movie (reviews on their own table)" Click="btnInsertComplexServerSide_Click" />
+        <Button Name="btnReadComplexServerSide" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1"
+                Margin="10" FontSize="30" Content="Read movies (reviews on their own table)" Click="btnReadComplexServerSide_Click" />
+        <TextBox AcceptsReturn="True" Margin="10" Name="txtDebug" Grid.Row="2" Grid.ColumnSpan="2" />
     </Grid>
 </Page>
