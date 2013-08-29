@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">1-n relationships</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="insert_movie_client">Insert movie (reviews as string)</string>
+    <string name="read_movie_client">Read movie (reviews as string)</string>
+    <string name="insert_movie_server">Insert movie (reviews on own table)</string>
+    <string name="read_movie_server">Read movies (reviews on own table)</string>
+
+</resources>
