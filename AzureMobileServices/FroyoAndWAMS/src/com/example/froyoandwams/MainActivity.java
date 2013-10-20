@@ -19,11 +19,18 @@ public class MainActivity extends Activity {
 
 	private MobileServiceClient mClient;
 
+	private static Activity mInstance;
+	public static Activity getInstance() {
+		return mInstance;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	
+
+		mInstance = this;
+
 		try {
 			mClient = new MobileServiceClient(
 				      "https://blog20131019.azure-mobile.net/", // Replace with your
@@ -33,6 +40,8 @@ public class MainActivity extends Activity {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+
+		mClient.setAndroidHttpClientFactory(new FroyoAndroidHttpClientFactory());
 
 		Button btn = (Button)findViewById(R.id.btnClickMe);
 		btn.setOnClickListener(new View.OnClickListener() {
