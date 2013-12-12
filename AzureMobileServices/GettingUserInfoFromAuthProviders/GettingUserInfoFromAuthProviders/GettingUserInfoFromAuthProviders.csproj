@@ -120,8 +120,6 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="ServerScripts\api\fbLikes.js" />
-    <Content Include="ServerScripts\api\googleUserInfo.js" />
     <Content Include="ServerScripts\api\userInfo.js" />
   </ItemGroup>
   <ItemGroup>
