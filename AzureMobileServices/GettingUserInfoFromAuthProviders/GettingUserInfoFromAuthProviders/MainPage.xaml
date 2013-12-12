@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="GettingUserInfoFromAuthProviders.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GettingUserInfoFromAuthProviders"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Button Name="btnFacebook" Content="Facebook Login" FontSize="25" Margin="10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnFacebook_Click" />
+        <Button Name="btnGoogle" Content="Google Login" FontSize="25" Margin="10"
+                Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnGoogle_Click" />
+        <Button Name="btnMicrosoft" Content="Microsoft Login" FontSize="25" Margin="10"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnMicrosoft_Click" />
+        <Button Name="btnTwitter" Content="Twitter Login" FontSize="25" Margin="10"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnTwitter_Click" />
+        <Button Name="btnLogout" Content="Logout" FontSize="25" Margin="10"
+                Grid.Row="1" Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnLogout_Click" />
+        <Button Name="btnCallAPI" Content="Call UserInfo API" FontSize="25" Margin="10"
+                Grid.Row="1" Grid.Column="2"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnCallAPI_Click" />
+        <TextBox AcceptsReturn="True" Name="txtDebug" Grid.Row="2" Grid.ColumnSpan="4" Margin="10" />
+    </Grid>
+</Page>
