@@ -13,12 +13,32 @@ namespace MongoDbOnNetBackend
 {
     public class OrderController : TableController<Order>
     {
+        static bool connectionStringInitialized = false;
+
+        private void InitializeConnectionString(string connStringName, string appSettingName)
+        {
+            if (!connectionStringInitialized)
+            {
+                connectionStringInitialized = true;
+                if (!this.Services.Settings.Connections.ContainsKey(connStringName))
+                {
+                    var connFromAppSetting = this.Services.Settings[appSettingName];
+                    var connSetting = new ConnectionSettings(connStringName, connFromAppSetting);
+                    this.Services.Settings.Connections.Add(connStringName, connSetting);
+                }
+            }
+        }
+
         protected override void Initialize(HttpControllerContext controllerContext)
         {
-            base.Initialize(controllerContext);
             var connStringName = "mongodb";
             var dbName = "MyMongoLab";
             var collectionName = "orders";
+
+            // Workaround for lack of connection strings in the portal
+            InitializeConnectionString(connStringName, "mongoConnectionString");
+
+            base.Initialize(controllerContext);
             this.DomainManager = new MongoDomainManager<Order>(connStringName, dbName, collectionName, this.Request, this.Services);
         }
 

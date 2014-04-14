@@ -11,3 +11,6 @@ TestResults
 
 #nuget packages
 packages/
+
+#publish profiles
+PublishProfiles/
