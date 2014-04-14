@@ -17,6 +17,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Name="btnFacebookLogin" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Content="Facebook Login" FontSize="30" Click="btnFacebookLogin_Click" />
@@ -24,12 +25,14 @@
                 Content="Google Login" FontSize="30" Grid.Column="1" Click="btnGoogleLogin_Click" />
         <Button Name="btnMicrosoftLogin" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Content="Microsoft Login" FontSize="30" Grid.Column="2" Click="btnMicrosoftLogin_Click" />
+        <Button Name="btnTwitterLogin" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                Content="Twitter Login" FontSize="30" Grid.Column="3" Click="btnTwitterLogin_Click" />
         <Button Name="btnLogout" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Content="Log out" FontSize="30" Grid.Row="1" Click="btnLogout_Click" />
         <Button Name="btnCallAPI" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Content="Call API" FontSize="30" Grid.Row="1" Grid.Column="1"  Click="btnCallAPI_Click" />
         <Button Name="btnCallTableScript" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 Content="Call Table Script" FontSize="30" Grid.Row="1" Grid.Column="2"  Click="btnCallTableScript_Click" />
-        <TextBox AcceptsReturn="True" Name="txtDebug" Grid.Row="2" Grid.ColumnSpan="3" Margin="10" />
+        <TextBox AcceptsReturn="True" Name="txtDebug" Grid.Row="2" Grid.ColumnSpan="4" Margin="10" />
     </Grid>
 </Page>

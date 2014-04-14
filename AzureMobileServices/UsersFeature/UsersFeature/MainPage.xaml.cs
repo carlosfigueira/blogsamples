@@ -109,5 +109,10 @@ namespace UsersFeature
             if (args != null && args.Length > 0) text = string.Format(text, args);
             this.txtDebug.Text = this.txtDebug.Text + text + Environment.NewLine;
         }
+
+        private async void btnTwitterLogin_Click(object sender, RoutedEventArgs e)
+        {
+            await Login(MobileServiceAuthenticationProvider.Twitter);
+        }
     }
 }
