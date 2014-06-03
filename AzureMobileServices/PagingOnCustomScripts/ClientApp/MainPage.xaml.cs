@@ -53,7 +53,6 @@ namespace ClientApp
             var items = await table
                 .Take(PageSize)
                 .Skip(this.currentIndex)
-                .OrderBy(t => t.Text)
                 .IncludeTotalCount()
                 .ToListAsync();
             this.lstItems.ItemsSource = items;
