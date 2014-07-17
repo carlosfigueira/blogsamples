@@ -10,7 +10,7 @@ namespace CRUDTests
     public class SimpleOperationsTests
     {
         public static MobileServiceClient Client = new MobileServiceClient(
-            "https://blog20140618.azure-mobile.net", "LuKpHqHmHgHBwuqpUzXonKnIdGOZBk59");
+            "https://blog20140618.azure-mobile.net", "umErdVDwyiFtEUjquGtoMPbEPmoFEr37");
         public static IMobileServiceTable<Order> Table = Client.GetTable<Order>();
 
         [TestMethod]

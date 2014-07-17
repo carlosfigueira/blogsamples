@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUDTests", "CRUDTests\CRUDTests.csproj", "{ED6FE3BE-9F6F-4359-9D6F-54B63BF5044C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComplexQueryTests", "ComplexQueryTests\ComplexQueryTests.csproj", "{2F32B65E-23A8-4F1E-B18C-ADCE58088FEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ED6FE3BE-9F6F-4359-9D6F-54B63BF5044C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED6FE3BE-9F6F-4359-9D6F-54B63BF5044C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED6FE3BE-9F6F-4359-9D6F-54B63BF5044C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F32B65E-23A8-4F1E-B18C-ADCE58088FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F32B65E-23A8-4F1E-B18C-ADCE58088FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F32B65E-23A8-4F1E-B18C-ADCE58088FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F32B65E-23A8-4F1E-B18C-ADCE58088FEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
