@@ -43,7 +43,7 @@ function returnMultipleObjects(collection, query, mongoHelper, request) {
     applyTopAndSkip(findOptions, queryComponents);
     applySelect(findOptions, queryComponents);
     applyOrdering(findOptions, queryComponents);
-    var findQuery = applyFilter(queryComponents, request);
+    var findQuery = getFilterQuery(queryComponents, request);
     if (findQuery === null) {
         // response already sent
         return;
@@ -100,7 +100,7 @@ function returnMultipleObjects(collection, query, mongoHelper, request) {
         }
     }
 
-    function applyFilter(queryComponents, request) {
+    function getFilterQuery(queryComponents, request) {
         // Simple case: filter that excludes everything; no need to talk to the DB
         if (queryComponents.filters && queryComponents.filters.queryString === 'false') {
             request.respond(200, []);
